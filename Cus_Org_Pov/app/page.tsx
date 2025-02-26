@@ -1,7 +1,6 @@
-"use client"
+import { CustomerHome } from "@/src/pages/customer/home"
 
-import LoginPage from "../login-page"
-
-export default function SyntheticV0PageForDeployment() {
-  return <LoginPage />
+export default function Page() {
+  return <CustomerHome />
 }
+

@@ -1,20 +1,27 @@
-import type { Metadata } from 'next'
-import './globals.css'
-
-export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
-}
+import type React from "react"
+import { MainLayout } from "@/src/layout/main-layout"
+import { ThemeProvider } from "@/src/providers/theme-provider"
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <MainLayout>{children}</MainLayout>
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
+
+
+
+import './globals.css'
+
+export const metadata = {
+      generator: 'v0.dev'
+    };
