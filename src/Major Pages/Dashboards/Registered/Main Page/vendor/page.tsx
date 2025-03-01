@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { WelcomeBanner } from "../../Elements/welcome-banner";
 import { Button } from "../../Elements/ui/button";
 import { Input } from "../../Elements/ui/input";
-import Header from "../../Elements/header";
 import { Sidebar } from "../../Elements/sidebar";
-import Footer from "../../Elements/footer";
 import { VendorCard } from "../../Elements/vendor-card";
 import { Search, SlidersHorizontal } from "lucide-react";
+import CombinedLayout from "../../Elements/combined-layout";
 
 export default function VendorDashboard() {
 	const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
@@ -30,9 +28,8 @@ export default function VendorDashboard() {
         className="flex flex-1 flex-col transition-all duration-300"
         style={{ marginLeft: isSidebarCollapsed ? "4rem" : "16rem" }}
       >
-        <Header />
-        <WelcomeBanner />
 
+                <CombinedLayout>
 					<div className="container px-4 py-8 sm:px-6 lg:px-8">
 						{/* Organizers Looking for Vendors */}
 						<div className="mb-12">
@@ -135,7 +132,7 @@ export default function VendorDashboard() {
 						</div>
 					</div>
 
-					<Footer />
+					</CombinedLayout>
 				</div>
 			</div>
 	);

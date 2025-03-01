@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Header from "@/Major Pages/Dashboards/Registered/Elements/header";
 import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
-import Footer from "@/Major Pages/Dashboards/Registered/Elements/footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
+import CombinedLayout from "../../combined-layout";
 
 const About = () => {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
@@ -15,8 +14,8 @@ const About = () => {
         className="flex flex-1 flex-col transition-all duration-300"
         style={{ marginLeft: isSidebarCollapsed ? "4rem" : "16rem" }}
       >
-        <Header />
-
+         
+         <CombinedLayout showWelcomeBanner={false}>
         <div className="container px-4 py-8 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-6">About Us</h1>
 
@@ -64,8 +63,7 @@ const About = () => {
             </CardContent>
           </Card>
         </div>
-
-        <Footer />
+        </CombinedLayout>
       </div>
     </div>
   );

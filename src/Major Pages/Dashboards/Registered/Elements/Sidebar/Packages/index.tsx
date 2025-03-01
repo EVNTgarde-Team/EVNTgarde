@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
 import { CheckCircle, XCircle } from "lucide-react";
-import Header from "@/Major Pages/Dashboards/Registered/Elements/header";
 import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
-import Footer from "@/Major Pages/Dashboards/Registered/Elements/footer";
+import CombinedLayout from "../../combined-layout";
 
 const Packages = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
@@ -40,7 +39,7 @@ const Packages = () => {
         className="flex flex-1 flex-col transition-all duration-300"
         style={{ marginLeft: isSidebarCollapsed ? "4rem" : "16rem" }}
       >
-        <Header />
+        <CombinedLayout showWelcomeBanner={false}>
 
         <div className="container px-4 py-8 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">Choose Your Package</h1>
@@ -74,7 +73,7 @@ const Packages = () => {
           </div>
         </div>
 
-        <Footer />
+        </CombinedLayout>
       </div>
     </div>
   );

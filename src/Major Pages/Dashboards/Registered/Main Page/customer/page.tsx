@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { WelcomeBanner } from "../../Elements/welcome-banner";
-import { Button } from "../../Elements/ui/button";
-import { Input } from "../../Elements/ui/input";
-import Header from "../../Elements//header";
 import { Sidebar } from "../../Elements/sidebar";
-import Footer from "../../Elements/footer";
 import { VendorCard } from "../../Elements/vendor-card";
 import { Search, SlidersHorizontal } from "lucide-react";
+import { Button } from "../../Elements/ui/button";
+import { Input } from "../../Elements/ui/input";
+import CombinedLayout from "../../Elements/combined-layout"; // Import the combined layout
 
 export default function CustomerDashboard() {
 	const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
@@ -22,16 +20,14 @@ export default function CustomerDashboard() {
 
 	return (
 		<div className="flex min-h-screen">
-      <Sidebar isCollapsed={isSidebarCollapsed} setIsCollapsed={setIsSidebarCollapsed} />
-      
-      {/* Dynamic margin based on sidebar state */}
-      <div
-        className="flex flex-1 flex-col transition-all duration-300"
-        style={{ marginLeft: isSidebarCollapsed ? "4rem" : "16rem" }}
-      >
-        <Header />
-        <WelcomeBanner />
+			<Sidebar isCollapsed={isSidebarCollapsed} setIsCollapsed={setIsSidebarCollapsed} />
 
+			<div
+				className="flex flex-1 flex-col transition-all duration-300"
+				style={{ marginLeft: isSidebarCollapsed ? "4rem" : "16rem" }}
+			>
+				{/* Use Combined Layout */}
+				<CombinedLayout>
 					<div className="container px-4 py-8 sm:px-6 lg:px-8">
 						{/* Organizers Section */}
 						<div className="mb-12">
@@ -54,21 +50,13 @@ export default function CustomerDashboard() {
 
 							<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 								{organizers.slice(0, visibleOrganizers).map((organizer) => (
-									<VendorCard
-										key={organizer.id}
-										{...organizer}
-										showHireButton={false}
-									/>
+									<VendorCard key={organizer.id} {...organizer} showHireButton={false} />
 								))}
 							</div>
 
 							{visibleOrganizers < organizers.length && (
 								<div className="mt-8 text-center">
-									<Button
-										variant="outline"
-										size="lg"
-										onClick={() => handleSeeMore("organizers")}
-									>
+									<Button variant="outline" size="lg" onClick={() => handleSeeMore("organizers")}>
 										See More
 									</Button>
 								</div>
@@ -78,24 +66,15 @@ export default function CustomerDashboard() {
 						{/* Bookings Section */}
 						<div className="mt-12">
 							<h2 className="mb-6 text-2xl font-semibold">Your Bookings</h2>
-
 							<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 								{bookings.slice(0, visibleBookings).map((booking) => (
-									<VendorCard
-										key={booking.id}
-										{...booking}
-										showHireButton={false}
-									/>
+									<VendorCard key={booking.id} {...booking} showHireButton={false} />
 								))}
 							</div>
 
 							{visibleBookings < bookings.length && (
 								<div className="mt-8 text-center">
-									<Button
-										variant="outline"
-										size="lg"
-										onClick={() => handleSeeMore("bookings")}
-									>
+									<Button variant="outline" size="lg" onClick={() => handleSeeMore("bookings")}>
 										See More
 									</Button>
 								</div>
@@ -104,10 +83,7 @@ export default function CustomerDashboard() {
 
 						{/* Organizer Packages Section */}
 						<div className="mt-12">
-							<h2 className="mb-6 text-2xl font-semibold">
-								Organizer Packages
-							</h2>
-
+							<h2 className="mb-6 text-2xl font-semibold">Organizer Packages</h2>
 							<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 								{packages.slice(0, visiblePackages).map((pkg) => (
 									<VendorCard key={pkg.id} {...pkg} showHireButton={false} />
@@ -116,23 +92,19 @@ export default function CustomerDashboard() {
 
 							{visiblePackages < packages.length && (
 								<div className="mt-8 text-center">
-									<Button
-										variant="outline"
-										size="lg"
-										onClick={() => handleSeeMore("packages")}
-									>
+									<Button variant="outline" size="lg" onClick={() => handleSeeMore("packages")}>
 										See More
 									</Button>
 								</div>
 							)}
 						</div>
 					</div>
-
-					<Footer />
-				</div>
+				</CombinedLayout>
 			</div>
+		</div>
 	);
 }
+
 
 // Updated Sample Data (More Entries Added)
 const organizers = [
