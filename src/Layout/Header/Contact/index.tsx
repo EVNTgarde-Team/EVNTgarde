@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Header from "@/components/header";
-import {Sidebar} from "@/components/sidebar";
-import Footer from "@/components/footer";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import Header from "@/Major Pages/Dashboards/Registered/Elements/header";
+import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
+import Footer from "@/Major Pages/Dashboards/Registered/Elements/footer";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
+import { Input } from "@/Major Pages/Dashboards/Registered/Elements/ui/input";
+import { Textarea } from "@/Major Pages/Dashboards/Registered/Elements/ui/textarea";
+import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
 
 const Contact = () => {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);

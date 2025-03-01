@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
+import { Card, CardContent, CardFooter } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
 import { Heart, Trash } from "lucide-react";
-import Header from "@/components/header";
-import {Sidebar} from "@/components/sidebar";
-import Footer from "@/components/footer";
+import Header from "@/Major Pages/Dashboards/Registered/Elements/header";
+import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
+import Footer from "@/Major Pages/Dashboards/Registered/Elements/footer";
 
 const Favorites = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);

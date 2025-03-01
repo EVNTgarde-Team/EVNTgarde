@@ -1,7 +1,7 @@
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card } from "@/Major Pages/Dashboards/Registered/Elements/ui/card"
+import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button"
 import { Clock, Star } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/Major Pages/Dashboards/Registered/Miscs/utils"
 
 interface VendorCardProps {
   name: string

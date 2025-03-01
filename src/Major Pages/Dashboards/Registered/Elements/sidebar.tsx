@@ -2,8 +2,8 @@
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { LayoutDashboard, CalendarDays, Star, Package, Settings, HelpCircle, LogOut, Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/Major Pages/Dashboards/Registered/Elements/ui/tooltip";
 
 const sidebarItems = [
   { title: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },

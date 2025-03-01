@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Switch } from "@/components/ui/switch";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Header from "@/components/header";
-import {Sidebar} from "@/components/sidebar";
-import Footer from "@/components/footer";
+import { Switch } from "@/Major Pages/Dashboards/Registered/Elements/ui/switch";
+import { Input } from "@/Major Pages/Dashboards/Registered/Elements/ui/input";
+import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
+import Header from "@/Major Pages/Dashboards/Registered/Elements/header";
+import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
+import Footer from "@/Major Pages/Dashboards/Registered/Elements/footer";
 
 const Settings = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);

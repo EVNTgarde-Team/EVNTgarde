@@ -1,7 +1,7 @@
 import { Bell, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/theme-toggle"; // Import ThemeToggle component
+import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
+import { cn } from "@/Major Pages/Dashboards/Registered/Miscs/utils";
+import { ThemeToggle } from "@/Major Pages/Dashboards/Registered/Elements/theme-toggle"; // Import ThemeToggle component
 import { usePathname } from "next/navigation";
 
 const navigation = [

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Header from "@/components/header";
-import {Sidebar} from "@/components/sidebar";
-import Footer from "@/components/footer";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Header from "@/Major Pages/Dashboards/Registered/Elements/header";
+import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
+import Footer from "@/Major Pages/Dashboards/Registered/Elements/footer";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
 
 const About = () => {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
