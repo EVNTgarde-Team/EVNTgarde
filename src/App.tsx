@@ -14,7 +14,6 @@ import Bookings from "./Major Pages/Dashboards/Registered/Elements/Sidebar/Booki
 import Favorites from "./Major Pages/Dashboards/Registered/Elements/Sidebar/Favorites/index";
 import Packages from "./Major Pages/Dashboards/Registered/Elements/Sidebar/Packages/index";
 import Settings from "./Major Pages/Dashboards/Registered/Elements/Sidebar/Settings/index";
-import Help from "./Major Pages/Dashboards/Registered/Elements/Sidebar/Help/index";
 
 import About from "./Major Pages/Dashboards/Registered/Elements/Header/About/index";
 import Contact from "./Major Pages/Dashboards/Registered/Elements/Header/Contact/index";
@@ -72,10 +71,6 @@ const App: React.FC = () => {
 					path="/settings"
 					element={isAuthenticated ? <Settings /> : <Navigate to="/" />}
 				/>
-				<Route
-					path="/help"
-					element={isAuthenticated ? <Help /> : <Navigate to="/" />}
-				/>
 				
 				{/* For debugging purpose only, need to update and add auth */}
                 <Route path="/customer" element={<CustomerPage />} />
@@ -86,7 +81,6 @@ const App: React.FC = () => {
                 <Route path="/favorites" element={<Favorites />} />
                 <Route path="/packages" element={<Packages />} />
 				<Route path="/settings" element={<Settings />} />
-				<Route path="/help" element={<Help />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/contact" element={<Contact />} />
 

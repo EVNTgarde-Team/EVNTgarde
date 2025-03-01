@@ -13,8 +13,7 @@ interface CombinedLayoutProps {
 const navigation = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
-  { name: "Packages", href: "/packages" },
+  { name: "Book", href: "/packages" },
 ];
 
 function Header() {
@@ -84,49 +83,61 @@ function WelcomeBanner() {
 
 function Footer() {
   return (
-    <footer className="bg-[#2B579A] text-white">
-      <div className="container grid gap-8 px-4 py-12 md:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div className="mb-6 flex items-center gap-2">
-            <div className="h-8 w-8 rounded bg-yellow-400 p-1">
-              <span className="block text-center text-sm font-bold text-blue-900">YNT</span>
-            </div>
-            <span className="text-lg font-semibold">Your next successful event starts here</span>
-          </div>
-          <h3 className="mb-4 text-lg font-semibold">Company Info</h3>
-          <ul className="space-y-2">
-            <li><a href="/about" className="text-sm text-gray-200 hover:text-yellow-400">About Us</a></li>
-            <li><a href="/contact" className="text-sm text-gray-200 hover:text-yellow-400">Contact Us</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 className="mb-4 text-lg font-semibold">Categories</h3>
-          <ul className="space-y-2">
-            <li><a href="#" className="text-sm text-gray-200 hover:text-yellow-400">Catering & F&B</a></li>
-            <li><a href="#" className="text-sm text-gray-200 hover:text-yellow-400">Venues & Meeting</a></li>
-            <li><a href="#" className="text-sm text-gray-200 hover:text-yellow-400">Audio & Design</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 className="mb-4 text-lg font-semibold">Follow Us</h3>
-          <ul className="space-y-2">
-            <li><a href="#" className="text-sm text-gray-200 hover:text-yellow-400">Facebook</a></li>
-            <li><a href="#" className="text-sm text-gray-200 hover:text-yellow-400">Instagram</a></li>
-            <li><a href="#" className="text-sm text-gray-200 hover:text-yellow-400">Twitter</a></li>
-            <li><a href="#" className="text-sm text-gray-200 hover:text-yellow-400">YouTube</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 className="mb-4 text-lg font-semibold">Help</h3>
-          <ul className="space-y-2">
-            <li><a href="#" className="text-sm text-gray-200 hover:text-yellow-400">Account Support</a></li>
-            <li><a href="#" className="text-sm text-gray-200 hover:text-yellow-400">Using EventHub</a></li>
-            <li><a href="#" className="text-sm text-gray-200 hover:text-yellow-400">Event Planning</a></li>
-          </ul>
-        </div>
-      </div>
-      <div className="border-t border-blue-400 py-6 text-center text-sm text-gray-200">© 2024 EventHub. All rights reserved.</div>
-    </footer>
+    <footer className="bg-[#2B579A] text-white dark:bg-[rgb(30,58,109)] py-8">
+		<div className="container mx-auto pl-4 pr-8"> {/* Reduced left padding, kept right padding */}
+			<div className="flex flex-wrap">
+			<div className="w-full md:w-1/3 mb-8 md:mb-0 pr-8"> {/* Added right padding */}
+				<img 
+				src="../../src/assets/Organizerlogo.png" 
+				alt="Logo" 
+				className="h-28 w-auto mb-4"
+				/>
+				<span className="text-sm font-bold tracking-wide text-gray-200 block">
+				Your next successful event starts here
+				</span>
+			</div>
+			
+			<div className="w-full md:w-2/3 flex flex-wrap">
+				{/* Company Info */}
+				<div className="w-1/2 sm:w-1/3 mb-6 pr-4">
+				<h4 className="font-semibold mb-4 text-base">Company Info</h4>
+				<ul className="space-y-2">
+					<li><a href="#" className="hover:underline text-sm">About Us</a></li>
+					<li><a href="#" className="hover:underline text-sm">Book now</a></li>
+				</ul>
+				</div>
+
+				{/* Categories */}
+				<div className="w-1/2 sm:w-1/3 mb-6 pr-4">
+				<h4 className="font-semibold mb-4 text-base">Categories</h4>
+				<ul className="space-y-2">
+					<li><a href="#" className="hover:underline text-sm">Concerts & Gigs</a></li>
+					<li><a href="#" className="hover:underline text-sm">Festivals & Lifestyle</a></li>
+					<li><a href="#" className="hover:underline text-sm">Business & Networking</a></li>
+					<li><a href="#" className="hover:underline text-sm">Food & Drinks</a></li>
+					<li><a href="#" className="hover:underline text-sm">Performing Arts</a></li>
+					<li><a href="#" className="hover:underline text-sm">Workshops & Classes</a></li>
+				</ul>
+				</div>
+
+				{/* Follow Us */}
+				<div className="w-1/2 sm:w-1/3 mb-6">
+				<h4 className="font-semibold mb-4 text-base">Follow Us</h4>
+				<ul className="space-y-2">
+					<li><a href="#" className="hover:underline text-sm">Facebook</a></li>
+					<li><a href="#" className="hover:underline text-sm">Instagram</a></li>
+					<li><a href="#" className="hover:underline text-sm">Twitter</a></li>
+				</ul>
+				</div>
+			</div>
+			</div>
+
+			{/* Footer Copyright Section */}
+			<div className="mt-8 border-t border-blue-500 pt-6 text-center text-sm">
+			© {new Date().getFullYear()} Platform. All rights reserved.
+			</div>
+		</div>
+		</footer>
   );
 }
 

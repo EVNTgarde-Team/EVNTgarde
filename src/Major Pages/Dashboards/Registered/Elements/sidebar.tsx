@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, CalendarDays, Star, Package, Settings, HelpCircle, LogOut, Menu } from "lucide-react";
+import { LayoutDashboard, CalendarDays, Star, Package, Settings, LogOut, Menu } from "lucide-react";
 import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/Major Pages/Dashboards/Registered/Elements/ui/tooltip";
 
@@ -11,7 +11,6 @@ const sidebarItems = [
   { title: "Reviews", icon: Star, href: "/reviews" },
   { title: "Packages", icon: Package, href: "/packages" },
   { title: "Settings", icon: Settings, href: "/settings" },
-  { title: "Help Center", icon: HelpCircle, href: "/help" },
 ];
 
 interface SidebarProps {
