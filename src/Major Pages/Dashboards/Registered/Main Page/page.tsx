@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../Elements/ui/button";
+import { Button } from "../Elements/ui/combined-ui";
+
 
 export default function Home() {
   const navigate = useNavigate();

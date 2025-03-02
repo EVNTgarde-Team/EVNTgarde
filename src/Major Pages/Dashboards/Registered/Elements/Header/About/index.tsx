@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../ui/combined-ui";
 import CombinedLayout from "../../combined-layout";
 
 const About = () => {

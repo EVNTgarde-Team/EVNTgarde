@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Sidebar } from "../../Elements/sidebar";
 import { VendorCard } from "../../Elements/vendor-card";
 import { Search, SlidersHorizontal } from "lucide-react";
-import { Button } from "../../Elements/ui/button";
-import { Input } from "../../Elements/ui/input";
+import { Button, Input } from "../../Elements/ui/combined-ui";
 import CombinedLayout from "../../Elements/combined-layout"; // Import the combined layout
 
 export default function CustomerDashboard() {

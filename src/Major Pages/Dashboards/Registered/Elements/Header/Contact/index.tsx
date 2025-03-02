@@ -1,9 +1,6 @@
 import { useState } from "react";
 import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
-import { Input } from "@/Major Pages/Dashboards/Registered/Elements/ui/input";
-import { Textarea } from "@/Major Pages/Dashboards/Registered/Elements/ui/textarea";
-import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Textarea } from "../../ui/combined-ui";
 import CombinedLayout from "../../combined-layout";
 
 const Contact = () => {

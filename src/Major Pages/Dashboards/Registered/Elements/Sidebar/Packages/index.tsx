@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
+import { Button, Card, CardContent, CardHeader, CardTitle } from "../../ui/combined-ui";
 import { CheckCircle, XCircle } from "lucide-react";
 import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
 import CombinedLayout from "../../combined-layout";

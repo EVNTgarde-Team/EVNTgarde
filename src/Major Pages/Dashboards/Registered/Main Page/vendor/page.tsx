@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Button } from "../../Elements/ui/button";
-import { Input } from "../../Elements/ui/input";
+import { Button, Input } from "../../Elements/ui/combined-ui";
 import { Sidebar } from "../../Elements/sidebar";
 import { VendorCard } from "../../Elements/vendor-card";
 import { Search, SlidersHorizontal } from "lucide-react";

@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { Switch } from "@/Major Pages/Dashboards/Registered/Elements/ui/switch";
-import { Input } from "@/Major Pages/Dashboards/Registered/Elements/ui/input";
-import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Switch } from "../../ui/combined-ui";
 import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
 import CombinedLayout from "../../combined-layout";
 

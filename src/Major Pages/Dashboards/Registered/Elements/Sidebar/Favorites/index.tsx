@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
-import { Card, CardContent, CardFooter } from "@/Major Pages/Dashboards/Registered/Elements/ui/card";
+import { Button, Card, CardContent, CardFooter } from "../../ui/combined-ui";
 import { Heart, Trash } from "lucide-react";
 import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
 import CombinedLayout from "../../combined-layout";

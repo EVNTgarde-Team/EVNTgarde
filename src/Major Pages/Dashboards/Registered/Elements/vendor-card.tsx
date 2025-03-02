@@ -1,5 +1,4 @@
-import { Card } from "@/Major Pages/Dashboards/Registered/Elements/ui/card"
-import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button"
+import { Button, Card } from "./ui/combined-ui";
 import { Clock, Star } from "lucide-react"
 import { cn } from "@/Major Pages/Dashboards/Registered/Miscs/utils"
 

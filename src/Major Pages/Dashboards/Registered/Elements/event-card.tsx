@@ -1,5 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/Major Pages/Dashboards/Registered/Elements/ui/card"
-import { Badge } from "@/Major Pages/Dashboards/Registered/Elements/ui/badge"
+import { Badge, Card, CardContent, CardHeader } from "./ui/combined-ui"
 import { Calendar, MapPin, Users } from "lucide-react"
 
 interface EventCardProps {

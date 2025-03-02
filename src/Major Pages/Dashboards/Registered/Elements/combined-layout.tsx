@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Bell, User } from "lucide-react";
-import { Button } from "@/Major Pages/Dashboards/Registered/Elements/ui/button";
+import { Button } from "./ui/combined-ui";
 import { cn } from "@/Major Pages/Dashboards/Registered/Miscs/utils";
 import { ThemeToggle } from "@/Major Pages/Dashboards/Registered/Elements/theme-toggle";
 import { usePathname } from "next/navigation";
