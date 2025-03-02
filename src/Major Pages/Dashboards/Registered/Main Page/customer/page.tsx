@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Sidebar } from "../../Elements/sidebar";
+import { Sidebar } from "../../Elements/sidebar-customer";
 import { VendorCard } from "../../Elements/vendor-card";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { Button, Input } from "../../Elements/ui/combined-ui";
-import CombinedLayout from "../../Elements/combined-layout"; // Import the combined layout
+import CombinedLayout from "../../Elements/combined-layout";
 
 export default function CustomerDashboard() {
 	const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);

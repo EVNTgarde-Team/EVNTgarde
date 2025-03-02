@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button, Card, CardContent, CardHeader, CardTitle, Input, Switch } from "../../ui/combined-ui";
-import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
-import CombinedLayout from "../../combined-layout";
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Switch } from "../../../../Elements/ui/combined-ui";
+import {Sidebar} from "../../../../Elements/sidebar-customer";
+import CombinedLayout from "../../../../Elements/combined-layout";
 
-const Settings = () => {
+const Reviews = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
@@ -88,4 +88,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default Reviews;

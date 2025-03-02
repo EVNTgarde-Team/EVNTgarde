@@ -13,7 +13,7 @@ interface CombinedLayoutProps {
 const navigation = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Book", href: "/packages" },
+  { name: "Book", href: "/bookings" },
 ];
 
 function Header() {
@@ -24,7 +24,7 @@ function Header() {
       <div className="container flex h-14 items-center gap-6">
         <a href="/" className="flex items-center gap-2">
           <div className="flex h-20 w-20 items-center justify-center rounded p-1">
-            <img src="/images/logo.png" alt="Logo" className="h-full w-full object-contain" />
+            <img src="/src/assets/OrganizerLogo.png" alt="Logo" className="h-full w-full object-contain" />
           </div>
         </a>
         <nav className="mx-auto flex items-center gap-6">
@@ -65,7 +65,7 @@ function WelcomeBanner() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-20 lg:py-24">
         <div className="flex flex-col sm:flex-row items-center justify-center">
           <div className="mb-8 sm:mb-0 sm:mr-8 flex-shrink-0">
-            <img src="/images/logo.png" alt="Logo" className="h-72 sm:h-96 lg:h-[393px] w-auto object-contain" />
+            <img src="/src/assets/OrganizerLogo.png" alt="Logo" className="h-48 sm:h-64 lg:h-98 max-w-xs sm:max-w-sm object-contain" />
           </div>
           <div className="text-center sm:text-left flex flex-col justify-center self-center">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">

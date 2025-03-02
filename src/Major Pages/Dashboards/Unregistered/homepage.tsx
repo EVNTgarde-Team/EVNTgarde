@@ -1,14 +1,30 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../../Layout/globals.css";
 import { Bell, Sun, Moon, Search, Filter } from "lucide-react";
 
 export default function HomePage() {
 	const [darkMode, setDarkMode] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		document.documentElement.classList.toggle("dark", darkMode);
 	}, [darkMode]);
 
+	useEffect(() => {
+		const handleClick = (event: MouseEvent) => {
+		  const target = event.target as HTMLElement;
+		  
+		  if (target.closest("a") && !["About", "Register"].includes(target.textContent?.trim() || "")) {
+			event.preventDefault();
+			navigate("/login");
+		  }
+		};
+	  
+		document.addEventListener("click", handleClick);
+		return () => document.removeEventListener("click", handleClick);
+	  }, [navigate]);
+	  
 	return (
 		<>
 		  {/* Header */}

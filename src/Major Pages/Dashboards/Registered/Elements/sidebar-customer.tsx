@@ -1,16 +1,15 @@
 "use client";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, CalendarDays, Star, Package, Settings, LogOut, Menu } from "lucide-react";
+import { CalendarDays, Star, Package, Settings, LogOut, Menu } from "lucide-react";
 import { Button } from "./ui/combined-ui";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../Elements/ui/combined-ui";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/combined-ui";
 
 const sidebarItems = [
-  { title: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
-  { title: "Bookings", icon: CalendarDays, href: "/bookings" },
-  { title: "Reviews", icon: Star, href: "/reviews" },
-  { title: "Packages", icon: Package, href: "/packages" },
-  { title: "Settings", icon: Settings, href: "/settings" },
+  { title: "Bookings", icon: CalendarDays, href: "/customer/bookings" },
+  { title: "RSVP", icon: Package, href: "/customer/RSVP" },
+  { title: "Reviews", icon: Star, href: "/customer/reviews" },
+  { title: "Settings", icon: Settings, href: "/customer/settings" },
 ];
 
 interface SidebarProps {

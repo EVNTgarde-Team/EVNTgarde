@@ -1,7 +1,7 @@
 import { useState } from "react";
-import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
-import { Button, Card, CardContent, CardHeader, CardTitle, Input, Textarea } from "../../ui/combined-ui";
-import CombinedLayout from "../../combined-layout";
+import {Sidebar} from "../../../../Elements/sidebar-vendor";
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Textarea } from "../../../../Elements/ui/combined-ui";
+import CombinedLayout from "../../../../Elements/combined-layout";
 
 const Contact = () => {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);

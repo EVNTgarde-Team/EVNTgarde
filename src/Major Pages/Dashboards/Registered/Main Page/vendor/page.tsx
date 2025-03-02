@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Input } from "../../Elements/ui/combined-ui";
-import { Sidebar } from "../../Elements/sidebar";
+import { Sidebar } from "../../Elements/sidebar-vendor";
 import { VendorCard } from "../../Elements/vendor-card";
 import { Search, SlidersHorizontal } from "lucide-react";
 import CombinedLayout from "../../Elements/combined-layout";

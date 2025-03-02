@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Button, Card, CardContent, CardHeader, CardTitle } from "../../ui/combined-ui";
+import { Button, Card, CardContent, CardHeader, CardTitle } from "../../../../Elements/ui/combined-ui";
 import { CheckCircle, XCircle } from "lucide-react";
-import {Sidebar} from "@/Major Pages/Dashboards/Registered/Elements/sidebar";
-import CombinedLayout from "../../combined-layout";
+import {Sidebar} from "../../../../Elements/sidebar-organizer";
+import CombinedLayout from "../../../../Elements/combined-layout";
 
 const Packages = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
