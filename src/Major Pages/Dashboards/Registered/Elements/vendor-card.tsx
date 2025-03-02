@@ -5,7 +5,7 @@ import { cn } from "@/Major Pages/Dashboards/Registered/Miscs/utils"
 interface VendorCardProps {
   name: string
   location: string
-  price: number
+  price: number | string;
   ratings: number
   image: string
   timeSlot: string
