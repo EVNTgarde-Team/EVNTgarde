@@ -5,9 +5,17 @@ npm i -g firebase-tools //access to all firebase tools
 
 //CSS Dependencies
 npm i tailwindcss postcss-cli autoprefixer //add tailwindcss
+npm i tailwind-merge
 
 //Misc 
 npm i --save-dev @testing-library/jest-dom
 npm i web-vitals
 npm i lucide-react
 npm i --save react-select
+npm install clsx
+npm install class-variance-authority
+npm i next-themes
+npm install next@latest react@latest react-dom@latest
+npm install @radix-ui/themes
+npm install cmdk
+npm install react-calendar

@@ -1,0 +1,131 @@
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { auth, db } from "./firebase";
+
+// Function to check if email already exists
+export const checkEmailExists = async (email: string): Promise<boolean> => {
+  try {
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+    return !querySnapshot.empty;
+  } catch (error) {
+    console.error("Error checking email existence:", error);
+    return false;
+  }
+};
+
+// Function to check if phone number already exists
+export const checkPhoneExists = async (phoneNumber: string): Promise<boolean> => {
+  // Skip check if phone number is empty
+  if (!phoneNumber) return false;
+  
+  try {
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("phoneNumber", "==", phoneNumber));
+    const querySnapshot = await getDocs(q);
+    return !querySnapshot.empty;
+  } catch (error) {
+    console.error("Error checking phone existence:", error);
+    return false;
+  }
+};
+
+// Register a new user
+export const registerUser = async (
+  email: string,
+  password: string,
+  userType: string,
+  userData: any
+) => {
+  try {
+    // Check if email already exists
+    const emailExists = await checkEmailExists(email);
+    if (emailExists) {
+      throw new Error("Email is already registered. Please use a different email address.");
+    }
+
+    // Check if phone number already exists (if provided)
+    if (userData.phoneNumber) {
+      const phoneExists = await checkPhoneExists(userData.phoneNumber);
+      if (phoneExists) {
+        throw new Error("Phone number is already registered. Please use a different phone number.");
+      }
+    }
+
+    // Create user in Firebase Authentication
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // Create user document in Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      email: email,
+      userType: userType,
+      ...userData,
+      createdAt: new Date().toISOString(),
+    });
+
+    return user;
+  } catch (error: any) {
+    if (error.code === "auth/email-already-in-use") {
+      throw new Error("Email is already registered. Please use a different email address.");
+    }
+    throw error;
+  }
+};
+
+// Login user
+export const loginUser = async (email: string, password: string) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // Get user data from Firestore
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      
+      // Store user type in localStorage
+      localStorage.setItem("userType", userData.userType);
+      localStorage.setItem("isAuthenticated", "true");
+      
+      return {
+        user,
+        userData
+      };
+    } else {
+      throw new Error("User data not found");
+    }
+  } catch (error: any) {
+    if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
+      throw new Error("Invalid email or password");
+    }
+    throw error;
+  }
+};
+
+// Logout user
+export const logoutUser = async () => {
+  try {
+    await auth.signOut();
+    localStorage.removeItem("userType");
+    localStorage.removeItem("isAuthenticated");
+  } catch (error) {
+    throw error;
+  }
+};
+
+const SESSION_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+
+export const checkSessionExpiry = () => {
+  const loginTimestamp = localStorage.getItem("loginTimestamp");
+  if (loginTimestamp) {
+    const elapsedTime = Date.now() - Number.parseInt(loginTimestamp, 10);
+    if (elapsedTime > SESSION_DURATION) {
+      logoutUser(); // Fix: Changed from logout() to logoutUser()
+      return true; // Session expired
+    }
+  }
+  return false; // Session active
+};

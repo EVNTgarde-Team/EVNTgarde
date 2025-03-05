@@ -2,10 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import "./RegistrationLogin"; // Import Tailwind styles
+import { ThemeProvider } from "@/Major Pages/Dashboards/Registered/Elements/theme-provider.tsx";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<App />
+		<ThemeProvider>
+      <App />
+    </ThemeProvider>
 	</StrictMode>
 );
