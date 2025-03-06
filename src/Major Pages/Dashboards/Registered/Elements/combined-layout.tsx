@@ -24,12 +24,12 @@ function Header() {
     customer: [
       { name: "Home", href: "/customer" },
       { name: "About", href: "/customer/about" },
-      { name: "Book", href: "/customer/book" },
+      { name: "Organizers", href: "/customer/organizers" },
     ],
     organizer: [
       { name: "Home", href: "/organizer" },
       { name: "About", href: "/organizer/about" },
-      { name: "Book", href: "/organizer/book" },
+      { name: "Vendors", href: "/organizer/vendors" },
     ],
     vendor: [
       { name: "Home", href: "/vendor" },

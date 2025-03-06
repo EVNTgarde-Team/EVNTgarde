@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import { CalendarDays, Star, Package, Settings, LogOut, Menu } from "lucide-react"
+import { CalendarDays, Star, Settings, LogOut, Menu, MailOpenIcon } from "lucide-react"
 import { Button } from "./ui/combined-ui"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/combined-ui"
 
 const sidebarItems = [
   { title: "Bookings", icon: CalendarDays, href: "/customer/bookings" },
-  { title: "RSVP", icon: Package, href: "/customer/RSVP" },
+  { title: "RSVP", icon: MailOpenIcon, href: "/customer/RSVP" },
   { title: "Reviews", icon: Star, href: "/customer/reviews" },
   { title: "Settings", icon: Settings, href: "/customer/settings" },
 ]

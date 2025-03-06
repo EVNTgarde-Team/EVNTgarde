@@ -38,7 +38,7 @@ import VendorRegistrationDarkPart2 from "./Major Pages/Login Page/Elements/Vendo
 
 /* CUSTOMER ROUTES */
 import About_customer from "./Major Pages/Dashboards/Registered/Main Page/customer/Header/About/index";
-import Book_customer from "./Major Pages/Dashboards/Registered/Main Page/customer/Header/Book/index";
+import Organizers_customer from "./Major Pages/Dashboards/Registered/Main Page/customer/Header/Organizers/index";
 import Bookings_customer from "./Major Pages/Dashboards/Registered/Main Page/customer/Sidebar/Bookings/index";
 import RSVP_customer from "./Major Pages/Dashboards/Registered/Main Page/customer/Sidebar/RSVP/index";
 import Reviews_customer from "./Major Pages/Dashboards/Registered/Main Page/customer/Sidebar/Reviews/index";
@@ -46,11 +46,14 @@ import Settings_customer from "./Major Pages/Dashboards/Registered/Main Page/cus
 
 /* ORGANIZER ROUTES */
 import About_organizer from "./Major Pages/Dashboards/Registered/Main Page/organizer/Header/About/index";
-import Book_organizer from "./Major Pages/Dashboards/Registered/Main Page/organizer/Header/Book/index";
+import Vendors_organizer from "./Major Pages/Dashboards/Registered/Main Page/organizer/Header/Vendors/index";
 import Bookings_organizer from "./Major Pages/Dashboards/Registered/Main Page/organizer/Sidebar/Bookings/Organizerindex";
 import Dashboard_organizer from "./Major Pages/Dashboards/Registered/Main Page/organizer/Sidebar/Dashboard/index";
 import RSVP_organizer from "./Major Pages/Dashboards/Registered/Main Page/organizer/Sidebar/RSVP/index";
 import Reviews_organizer from "./Major Pages/Dashboards/Registered/Main Page/organizer/Sidebar/Reviews/index";
+import UserManagement_organizer from "./Major Pages/Dashboards/Registered/Main Page/organizer/Sidebar/Usermanagement/index";
+import Trifecta_organizer from "./Major Pages/Dashboards/Registered/Main Page/organizer/Sidebar/Trifecta/index";
+import Settings_organizer from "./Major Pages/Dashboards/Registered/Main Page/organizer/Sidebar/Settings/index";
 
 /* VENDOR ROUTES */
 import About_vendor from "./Major Pages/Dashboards/Registered/Main Page/vendor/Header/About/index";
@@ -279,7 +282,7 @@ const App: React.FC = () => {
 
 					{/* CUSTOMER ROUTES */}
 					<Route path="/customer/about" element={<About_customer />} />
-					<Route path="/customer/book" element={<Book_customer />} />
+					<Route path="/customer/organizers" element={<Organizers_customer />} />
 					<Route path="/customer/bookings" element={<Bookings_customer />} />
 					<Route path="/customer/RSVP" element={<RSVP_customer />} />
 					<Route path="/customer/reviews" element={<Reviews_customer />} />
@@ -287,7 +290,7 @@ const App: React.FC = () => {
 
 					{/* ORGANIZER ROUTES */}
 					<Route path="/organizer/about" element={<About_organizer />} />
-					<Route path="/organizer/book" element={<Book_organizer />} />
+					<Route path="/organizer/vendors" element={<Vendors_organizer />} />
 					<Route path="/organizer/bookings" element={<Bookings_organizer />} />
 					<Route
 						path="/organizer/dashboard"
@@ -295,6 +298,9 @@ const App: React.FC = () => {
 					/>
 					<Route path="/organizer/RSVP" element={<RSVP_organizer />} />
 					<Route path="/organizer/reviews" element={<Reviews_organizer />} />
+					<Route path="/organizer/usermanagement" element={<UserManagement_organizer />} />
+					<Route path="/organizer/trifecta" element={<Trifecta_organizer />} />
+					<Route path="/organizer/settings" element={<Settings_organizer />} />
 
 					{/* VENDOR ROUTES */}
 					<Route path="/vendor/about" element={<About_vendor />} />

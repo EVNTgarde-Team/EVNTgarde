@@ -12,7 +12,7 @@ const vendors = [
   { id: 5, name: "Music Masters", category: "Entertainment", description: "Live music and DJs for any special occasion." },
 ];
 
-const Book = () => {
+const Vendors = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
   const [search, setSearch] = useState("");
 
@@ -80,4 +80,4 @@ const Book = () => {
   );
 };
 
-export default Book;
+export default Vendors;
