@@ -12,7 +12,7 @@ const vendors = [
   { id: 5, name: "Music Masters", category: "Entertainment", description: "Live music and DJs for any special occasion." },
 ];
 
-const Book = () => {
+const Organizers = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
   const [search, setSearch] = useState("");
 
@@ -23,7 +23,9 @@ const Book = () => {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Sidebar isCollapsed={isSidebarCollapsed} setIsCollapsed={setIsSidebarCollapsed} />
+      <Sidebar isCollapsed={isSidebarCollapsed} setIsCollapsed={setIsSidebarCollapsed} logout={function (): void {
+        throw new Error("Function not implemented.");
+      } } />
 
       {/* Adjust margin dynamically based on sidebar state */}
       <div className="flex flex-1 flex-col transition-all duration-300" style={{ marginLeft: isSidebarCollapsed ? "4rem" : "16rem" }}>
@@ -80,4 +82,4 @@ const Book = () => {
   );
 };
 
-export default Book;
+export default Organizers;

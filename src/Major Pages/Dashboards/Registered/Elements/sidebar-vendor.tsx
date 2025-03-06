@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import { LayoutDashboard, CalendarDays, Star, Settings, LogOut, Menu, UserRound, MapPin } from "lucide-react"
+import { LayoutDashboard, CalendarDays, Star, LogOut, Menu, UserRound, MapPin, Users2Icon } from "lucide-react"
 import { Button } from "./ui/combined-ui"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/combined-ui"
 
@@ -7,9 +7,9 @@ const sidebarItems = [
   { title: "Dashboard", icon: LayoutDashboard, href: "/vendor/dashboard" },
   { title: "Bookings", icon: CalendarDays, href: "/vendor/bookings" },
   { title: "Reviews", icon: Star, href: "/vendor/reviews" },
-  { title: "User Management", icon: UserRound, href: "/vendor/usermanagement" },
+  { title: "User Management", icon: Users2Icon, href: "/vendor/usermanagement" },
   { title: "Track", icon: MapPin, href: "/vendor/track" },
-  { title: "Settings", icon: Settings, href: "/vendor/settings" },
+  { title: "Settings", icon: UserRound, href: "/vendor/settings" },
 ]
 
 interface SidebarProps {

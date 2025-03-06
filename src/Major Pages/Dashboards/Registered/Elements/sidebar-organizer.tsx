@@ -1,13 +1,16 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import { LayoutDashboard, CalendarDays, Star, Package, LogOut, Menu } from "lucide-react"
+import { LayoutDashboard, CalendarDays, Star, LogOut, Menu, MapIcon, UserRound, MailOpenIcon, Users2Icon,} from "lucide-react"
 import { Button } from "./ui/combined-ui"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/combined-ui"
 
 const sidebarItems = [
   { title: "Dashboard", icon: LayoutDashboard, href: "/organizer/dashboard" },
   { title: "Bookings", icon: CalendarDays, href: "/organizer/bookings" },
-  { title: "RSVP", icon: Package, href: "/organizer/RSVP" },
+  { title: "RSVP", icon: MailOpenIcon, href: "/organizer/RSVP" },
   { title: "Reviews", icon: Star, href: "/organizer/reviews" },
+  { title: "User Management", icon: Users2Icon, href: "/organizer/usermanagement" },
+  { title: "Trifecta", icon: MapIcon, href: "/organizer/trifecta" },
+  { title: "Settings", icon: UserRound, href: "/organizer/settings" },
 ]
 
 interface SidebarProps {
