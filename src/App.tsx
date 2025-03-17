@@ -10,25 +10,14 @@ import HomePage from "./Major Pages/Dashboards/Unregistered/homepage"; // Non-re
 import HomePageDark from "./Major Pages/Dashboards/Unregistered/homepage"; // Non-registered dark
 import AboutLoggedOut from "./Major Pages/Dashboards/Unregistered/about-loggedout";
 import LoginPage from "./Major Pages/Login Page/Elements/LoginPage"; // Login page
-import LoginPageDark from "./Major Pages/Login Page/Elements/LoginPageDark"; // Login page
 
-import RoleSelection from "./Major Pages/Login Page/Elements/RoleSelection (Light Mode)";
-import RoleSelectionDark from "./Major Pages/Login Page/Elements/RoleSelection (Dark Mode)";
+//consolidated role selection
+import RoleSelection from "./Major Pages/Login Page/Elements/RoleSelection"; 
 
-// Individual Registration Components
-import IndividualRegistrationPart1 from "./Major Pages/Login Page/Elements/IndividualRegistration Part 1 (Light Mode)";
-import IndividualRegistrationDarkPart1 from "./Major Pages/Login Page/Elements/IndividualRegistration Part 1 (Dark Mode)";
-import IndividualRegistrationPart2 from "./Major Pages/Login Page/Elements/IndividualRegistration Part 2 (Light Mode)";
-import IndividualRegistrationDarkPart2 from "./Major Pages/Login Page/Elements/IndividualRegistration Part 2 (Dark Mode)";
-
-// Organizer Registration New
+// Registration Components
 import OrganizerRegistration from "./Major Pages/Login Page/Elements/OrganizerRegistration"
-
-// Vendor Registration Components
-import VendorRegistrationPart1 from "./Major Pages/Login Page/Elements/VendorRegistration Part 1 (Light Mode)";
-import VendorRegistrationDarkPart1 from "./Major Pages/Login Page/Elements/VendorRegistration Part 1 (Dark Mode)";
-import VendorRegistrationPart2 from "./Major Pages/Login Page/Elements/VendorRegistration Part 2 (Light Mode)";
-import VendorRegistrationDarkPart2 from "./Major Pages/Login Page/Elements/VendorRegistration Part 2 (Dark Mode)";
+import IndividualRegistration from "./Major Pages/Login Page/Elements/IndividualRegistration"
+import VendorRegistration from "./Major Pages/Login Page/Elements/VendorRegistration"
 
 /* CUSTOMER ROUTES */
 import About_customer from "./Major Pages/Dashboards/Registered/Main Page/customer/Header/About/index";
@@ -134,60 +123,32 @@ const App: React.FC = () => {
 				/>
 
 				<Route
-					path="/login"
-					element={
-						isAuthenticated ? (
-							<Navigate to={getDashboardRoute()} />
-						) : (
-							getThemedComponent(
-								<LoginPage login={login} />,
-								<LoginPageDark login={login} />
-							)
-						)
-					}
+				path="/login"
+				element={
+					isAuthenticated ? (
+					<Navigate to={getDashboardRoute()} />
+					) : (
+					<LoginPage login={login} />
+					)
+				}
 				/>
 
-				<Route
-					path="/role-selection"
-					element={getThemedComponent(<RoleSelection />, <RoleSelectionDark />)}
-				/>
+				{/* Consolidated Role Selection Route */}
+				<Route path="/role-selection" element={<RoleSelection />} />
+        		<Route path="/role-selection-dark" element={<Navigate to="/role-selection" />} />
 
-				{/* Individual Registration Routes - Two-part flow with theme support */}
-				<Route
-					path="/register/individual"
-					element={getThemedComponent(
-						<IndividualRegistrationPart1 />,
-						<IndividualRegistrationDarkPart1 />
-					)}
-				/>
-				<Route
-					path="/register/individual/part2"
-					element={getThemedComponent(
-						<IndividualRegistrationPart2 />,
-						<IndividualRegistrationDarkPart2 />
-					)}
-				/>
+				 {/* Registration Routes */}
+				 <Route path="/register/organizer" element={<OrganizerRegistration step={1} />} />
+        <Route path="/register/organizer/step2" element={<OrganizerRegistration step={2} />} />
+        <Route path="/register/organizer/step3" element={<OrganizerRegistration step={3} />} />
 
+        <Route path="/register/individual" element={<IndividualRegistration step={1} />} />
+        <Route path="/register/individual/step2" element={<IndividualRegistration step={2} />} />
+        <Route path="/register/individual/step3" element={<IndividualRegistration step={3} />} />
 
-					{/* Organizer Registration New */}
-					<Route path="/register/organizer" element={getThemedComponent(<OrganizerRegistration />)} />
-
-					
-					{/* Vendor Registration Routes - Two-part flow with theme support */}
-					<Route
-						path="/register/vendor"
-						element={getThemedComponent(
-							<VendorRegistrationPart1 />,
-							<VendorRegistrationDarkPart1 />
-						)}
-					/>
-					<Route
-						path="/register/vendor/part2"
-						element={getThemedComponent(
-							<VendorRegistrationPart2 />,
-							<VendorRegistrationDarkPart2 />
-						)}
-					/>
+        <Route path="/register/vendor" element={<VendorRegistration step={1} />} />
+        <Route path="/register/vendor/step2" element={<VendorRegistration step={2} />} />
+        <Route path="/register/vendor/step3" element={<VendorRegistration step={3} />} />
 
 				<Route path="/about" element={<AboutLoggedOut />} />
 

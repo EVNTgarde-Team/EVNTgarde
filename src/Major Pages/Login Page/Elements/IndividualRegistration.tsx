@@ -1,6 +1,4 @@
-"use client"
-
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff } from "lucide-react"
 import type React from "react"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
@@ -10,19 +8,18 @@ import { registerUser } from "../../../functions/authFunctions"
 import { createUserAccount } from "../../../functions/userAccount"
 import { useTheme } from "../../../functions/ThemeContext"
 
-const OrganizerRegistration: React.FC<{ step: number }> = ({ step = 1 }) => {
+const IndividualRegistration: React.FC<{ step: number }> = ({ step = 1 }) => {
   const navigate = useNavigate()
   const [currentStep, setCurrentStep] = useState(step)
   const { isDarkMode } = useTheme()
-  
 
   // Step 2 form state (previously step 1)
-  const [companyName, setCompanyName] = useState("")
-  const [industry, setIndustry] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
   const [preferences, setPreferences] = useState<string[]>([])
 
   // Step 3 form state (previously step 2)
-  const [phoneNumber, setPhoneNumber] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -33,24 +30,12 @@ const OrganizerRegistration: React.FC<{ step: number }> = ({ step = 1 }) => {
   const [confirmPasswordError, setConfirmPasswordError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
-  // Common state
-  const [error, setError] = useState("")
-
   useEffect(() => {
     setCurrentStep(step);
   }, [step]);
 
-  // Industry options
-  const industryOptions = [
-    { value: "", label: "Please select your company industry" },
-    { value: "events", label: "Events Management" },
-    { value: "hospitality", label: "Hospitality" },
-    { value: "entertainment", label: "Entertainment" },
-    { value: "food", label: "Food & Beverage" },
-  ]
-
-  // Preference options
-  const preferenceOptions = ["Procurement", "Reservations", "Inventory", "Logistics"]
+  // Common state
+  const [error, setError] = useState("")
 
   // Password validation
   useEffect(() => {
@@ -77,56 +62,44 @@ const OrganizerRegistration: React.FC<{ step: number }> = ({ step = 1 }) => {
   // Load data from session storage when moving to step 3
   useEffect(() => {
     if (currentStep === 3) {
-      const storedData = sessionStorage.getItem("organizerRegistration")
+      const storedData = sessionStorage.getItem("individualRegistration")
       if (storedData) {
         const data = JSON.parse(storedData)
-        setCompanyName(data.companyName)
-        setIndustry(data.industry)
+        setFirstName(data.firstName)
+        setLastName(data.lastName)
+        setPhoneNumber(data.phoneNumber.replace("+63", ""))
         setPreferences(data.preferences)
       }
     }
   }, [currentStep])
 
-  // Handle preference change
-  const handlePreferenceChange = (preference: string) => {
-    if (preferences.includes(preference)) {
-      setPreferences(preferences.filter((p) => p !== preference))
-    } else {
-      setPreferences([...preferences, preference])
-    }
-  }
-
   // Handle welcome screen proceed button
   const handleProceed = () => {
-    navigate("/register/organizer/step2")
+    navigate("/register/individual/step2")
   }
 
   // Handle step 2 submission (previously step 1)
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!companyName || !industry) {
-      setError("Company name and industry are required")
-      return
-    }
-
-    if (preferences.length === 0) {
-      setError("Please select at least one system preference")
+    if (!firstName || !lastName) {
+      setError("First name and last name are required")
       return
     }
 
     // Store form data in sessionStorage to retrieve in part 3
     sessionStorage.setItem(
-      "organizerRegistration",
+      "individualRegistration",
       JSON.stringify({
-        companyName,
-        industry,
+        firstName,
+        lastName,
+        phoneNumber: phoneNumber ? `+63${phoneNumber}` : "",
         preferences,
-      })
+      }),
     )
 
     // Navigate to step 3
-    navigate("/register/organizer/step3")
+    navigate("/register/individual/step3")
   }
 
   // Handle back button
@@ -134,9 +107,9 @@ const OrganizerRegistration: React.FC<{ step: number }> = ({ step = 1 }) => {
     if (currentStep === 1) {
       navigate("/role-selection")
     } else if (currentStep === 2) {
-      navigate("/register/organizer")
+      navigate("/register/individual")
     } else {
-      navigate("/register/organizer/step2")
+      navigate("/register/individual/step2")
     }
   }
 
@@ -169,18 +142,18 @@ const OrganizerRegistration: React.FC<{ step: number }> = ({ step = 1 }) => {
 
     try {
       // Create user account with data from both parts
-      const userData = createUserAccount("organizer", email, {
-        companyName,
-        industry,
+      const userData = createUserAccount("individual", email, {
+        firstName,
+        lastName,
         phoneNumber: phoneNumber ? `+63${phoneNumber}` : "",
         preferences,
       })
 
       // Register user with Firebase
-      await registerUser(email, password, "organizer", userData)
+      await registerUser(email, password, "individual", userData)
 
       // Clear session storage
-      sessionStorage.removeItem("organizerRegistration")
+      sessionStorage.removeItem("individualRegistration")
 
       // Navigate to login page
       navigate("/login")
@@ -209,13 +182,13 @@ const OrganizerRegistration: React.FC<{ step: number }> = ({ step = 1 }) => {
             /* Welcome Screen */
             <>
               <h2 className="text-4xl font-bold mb-6">Sign Up</h2>
-              
+
               <div className="mb-8">
-                <h3 className="text-2xl font-semibold mb-4">You're an Organizer!</h3>
+                <h3 className="text-2xl font-semibold mb-4">You're Planning an Event!</h3>
                 <p className="text-lg mb-6">
-                  Perfect Pick! Connect with vendors to create successful events. We'll help you get set up right away.
+                Perfect Pick! Find experienced organizers to bring your event to life. We'll help you get set up right away.
                 </p>
-                
+
               </div>
 
               <div className="flex justify-between mt-4">
@@ -246,103 +219,43 @@ const OrganizerRegistration: React.FC<{ step: number }> = ({ step = 1 }) => {
             /* Step 2 Form (previously step 1) */
             <>
               <h2 className="text-4xl font-bold mb-6">Sign Up</h2>
-              
+
               {error && <div className="bg-red-500 text-white p-3 rounded-md mb-4">{error}</div>}
-              
+
               <form className="space-y-6" onSubmit={handleNext}>
                 <div>
                   <label className={`block text-sm font-medium mb-2 ${isDarkMode ? "text-white" : "text-gray-700"}`}>
-                    Company Name
+                    First Name
                   </label>
                   <input
                     type="text"
-                    placeholder="John's Event Services"
+                    placeholder="John"
                     className={`w-full px-4 py-2 border rounded-md text-sm focus:outline-blue-500 ${
                       isDarkMode ? "bg-gray-700 text-white border-gray-600" : "bg-white text-gray-800 border-gray-300"
                     }`}
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     required
                   />
                 </div>
 
                 <div>
                   <label className={`block text-sm font-medium mb-2 ${isDarkMode ? "text-white" : "text-gray-700"}`}>
-                    Industry
+                    Last Name
                   </label>
-                  <select
-                    className={`w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  <input
+                    type="text"
+                    placeholder="Doe"
+                    className={`w-full px-4 py-2 border rounded-md text-sm focus:outline-blue-500 ${
                       isDarkMode ? "bg-gray-700 text-white border-gray-600" : "bg-white text-gray-800 border-gray-300"
                     }`}
-                    value={industry}
-                    onChange={(e) => setIndustry(e.target.value)}
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     required
-                  >
-                    {industryOptions.map((option) => (
-                      <option
-                        key={option.value}
-                        value={option.value}
-                        className={isDarkMode ? "text-white" : "text-gray-800"}
-                      >
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </div>
 
                 <div>
-                  <label className={`block text-sm font-medium mb-2 ${isDarkMode ? "text-white" : "text-gray-700"}`}>
-                    System Preferences
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {preferenceOptions.map((preference) => (
-                      <label key={preference} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          name="preference"
-                          className="mr-2"
-                          checked={preferences.includes(preference)}
-                          onChange={() => handlePreferenceChange(preference)}
-                        />
-                        {preference}
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex justify-between mt-4">
-                  <button
-                    type="button"
-                    onClick={handleBack}
-                    className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700"
-                  >
-                    Back
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                  >
-                    Next
-                  </button>
-                </div>
-
-                <p className={`text-center mt-4 ${isDarkMode ? "text-white" : "text-gray-700"}`}>
-                  Already have an account?{" "}
-                  <a href="/login" className="text-blue-600 hover:underline">
-                    Log in
-                  </a>
-                </p>
-              </form>
-            </>
-          ) : (
-            /* Step 3 Form (previously step 2) */
-            <>
-              <h2 className="text-4xl font-bold mb-6">Sign Up</h2>
-              
-              {error && <div className="bg-red-500 text-white p-3 rounded-md mb-4">{error}</div>}
-
-              <form onSubmit={handleCreateAccount}>
-                <div className="mb-4">
                   <label className={`block text-sm font-medium mb-2 ${isDarkMode ? "text-white" : "text-gray-700"}`}>
                     Phone Number (optional)
                   </label>
@@ -360,13 +273,43 @@ const OrganizerRegistration: React.FC<{ step: number }> = ({ step = 1 }) => {
                   </div>
                 </div>
 
+
+                <div className="flex justify-between mt-4">
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700"
+                  >
+                    Back
+                  </button>
+                  <button type="submit" className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Next
+                  </button>
+                </div>
+
+                <p className={`text-center mt-4 ${isDarkMode ? "text-white" : "text-gray-700"}`}>
+                  Already have an account?{" "}
+                  <a href="/login" className="text-blue-600 hover:underline">
+                    Log in
+                  </a>
+                </p>
+              </form>
+            </>
+          ) : (
+            /* Step 3 Form (previously step 2) */
+            <>
+              <h2 className="text-4xl font-bold mb-6">Sign Up</h2>
+
+              {error && <div className="bg-red-500 text-white p-3 rounded-md mb-4">{error}</div>}
+
+              <form onSubmit={handleCreateAccount}>
                 <div className="mb-4">
                   <label className={`block text-sm font-medium mb-2 ${isDarkMode ? "text-white" : "text-gray-700"}`}>
-                    Company Email Address
+                    Email Address
                   </label>
                   <input
                     type="email"
-                    placeholder="company@gmail.com"
+                    placeholder="Enter your email"
                     className={`w-full px-4 py-2 border rounded-md text-sm focus:outline-blue-500 ${
                       isDarkMode ? "bg-gray-700 text-white border-gray-600" : "bg-white text-gray-800 border-gray-300"
                     }`}
@@ -486,4 +429,5 @@ const OrganizerRegistration: React.FC<{ step: number }> = ({ step = 1 }) => {
   )
 }
 
-export default OrganizerRegistration
+export default IndividualRegistration
+
