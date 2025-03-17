@@ -2,12 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import { ThemeProvider } from "@/Major Pages/Dashboards/Registered/Elements/theme-provider.tsx";
+import { ThemeProvider } from "./functions/ThemeContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<ThemeProvider>
-      <App />
-    </ThemeProvider>
+			<App />
+		</ThemeProvider>
 	</StrictMode>
 );

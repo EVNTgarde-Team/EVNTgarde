@@ -1,21 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../../Layout/globals.css";
-import { Sun, Moon, Search, Filter } from "lucide-react";
+import { Search, Filter } from "lucide-react";
 import { searchAndFilterItems } from "../../../functions/search";
+//import { ThemeToggle } from "../Registered/Elements/theme-toggle";
+import { ThemeToggle } from "../../../functions/ThemeToogle";
+import { useTheme } from "@/functions/ThemeContext";
 
-export default function HomePage() {
-	const [darkMode, setDarkMode] = useState(false);
+const Homepage: React.FC = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 	const [showFilterMenu, setShowFilterMenu] = useState(false);
 	const navigate = useNavigate();
 	const handleNavigation = (path: string) => () => navigate(path);
 	const handleExternalLink = (url: string) => () => window.open(url, "_blank");
-
-	useEffect(() => {
-		document.documentElement.classList.toggle("dark", darkMode);
-	}, [darkMode]);
 
 	/*
   useEffect(() => {
@@ -128,10 +126,16 @@ export default function HomePage() {
 		]),
 	];
 
+	const { isDarkMode } = useTheme();
+
 	return (
 		<>
 			{/* Header */}
-			<header className="sticky top-0 z-50 w-full bg-[#2B579A] text-white dark:bg-[#1E3A6D]">
+			<header
+				className={`sticky top-0 z-50 w-full text-white transition-colors ${
+					isDarkMode ? "bg-[#1E3A6D]" : "bg-[#2B579A]"
+				}`}
+			>
 				<div className="w-full px-8 flex h-14 items-center justify-between">
 					{/* Left section - Logo */}
 					<div className="flex-1">
@@ -176,16 +180,7 @@ export default function HomePage() {
 
 					{/* Right section - User actions */}
 					<div className="flex-1 flex items-center justify-end gap-4">
-						<button
-							className="p-2 text-white hover:text-gray-200"
-							onClick={() => setDarkMode(!darkMode)}
-						>
-							{darkMode ? (
-								<Sun className="h-5 w-5" />
-							) : (
-								<Moon className="h-5 w-5" />
-							)}
-						</button>
+						<ThemeToggle />
 						<a
 							href="/login"
 							className="relative text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-yellow-400 after:transition-all hover:after:w-full"
@@ -526,4 +521,6 @@ export default function HomePage() {
 			</main>
 		</>
 	);
-}
+};
+
+export default Homepage;

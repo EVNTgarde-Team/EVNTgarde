@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./Major Pages/Login Page/Main Page/RegistrationLogin.tsx";
+import App from "./App.tsx";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals.ts";
 
