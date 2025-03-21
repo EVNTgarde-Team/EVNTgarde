@@ -6,7 +6,6 @@ import {
 	Route,
 	Navigate,
 } from "react-router-dom";
-import { ThemeProvider } from "./Major Pages/Dashboards/Registered/Elements/theme-provider";
 import HomePage from "./Major Pages/Dashboards/Unregistered/homepage"; // Non-registered home
 import HomePageDark from "./Major Pages/Dashboards/Unregistered/homepage"; // Non-registered dark
 import AboutLoggedOut from "./Major Pages/Dashboards/Unregistered/about-loggedout";
@@ -122,226 +121,224 @@ const App: React.FC = () => {
 	};
 
 	return (
-		<ThemeProvider>
-			<Router>
-				{/* Main Content Wrapper */}
-				<Routes>
-					{/* Public routes */}
-					<Route
-						path="/"
-						element={
-							isAuthenticated ? (
-								<Navigate to={getDashboardRoute()} />
-							) : (
-								getThemedComponent(<HomePage />, <HomePageDark />)
+		<Router>
+			{/* Main Content Wrapper */}
+			<Routes>
+				{/* Public routes */}
+				<Route
+					path="/"
+					element={
+						isAuthenticated ? (
+							<Navigate to={getDashboardRoute()} />
+						) : (
+							getThemedComponent(<HomePage />, <HomePageDark />)
+						)
+					}
+				/>
+
+				<Route
+					path="/login"
+					element={
+						isAuthenticated ? (
+							<Navigate to={getDashboardRoute()} />
+						) : (
+							getThemedComponent(
+								<LoginPage login={login} />,
+								<LoginPageDark login={login} />
 							)
-						}
-					/>
+						)
+					}
+				/>
 
-					<Route
-						path="/login"
-						element={
-							isAuthenticated ? (
-								<Navigate to={getDashboardRoute()} />
-							) : (
-								getThemedComponent(
-									<LoginPage login={login} />,
-									<LoginPageDark login={login} />
-								)
-							)
-						}
-					/>
+				<Route
+					path="/role-selection"
+					element={getThemedComponent(<RoleSelection />, <RoleSelectionDark />)}
+				/>
 
-					<Route
-						path="/role-selection"
-						element={getThemedComponent(<RoleSelection />, <RoleSelectionDark />)}
-					/>
+				{/* Individual Registration Routes - Two-part flow with theme support */}
+				<Route
+					path="/register/individual"
+					element={getThemedComponent(
+						<IndividualRegistrationPart1 />,
+						<IndividualRegistrationDarkPart1 />
+					)}
+				/>
+				<Route
+					path="/register/individual/part2"
+					element={getThemedComponent(
+						<IndividualRegistrationPart2 />,
+						<IndividualRegistrationDarkPart2 />
+					)}
+				/>
 
-					{/* Individual Registration Routes - Two-part flow with theme support */}
-					<Route
-						path="/register/individual"
-						element={getThemedComponent(
-							<IndividualRegistrationPart1 />,
-							<IndividualRegistrationDarkPart1 />
-						)}
-					/>
-					<Route
-						path="/register/individual/part2"
-						element={getThemedComponent(
-							<IndividualRegistrationPart2 />,
-							<IndividualRegistrationDarkPart2 />
-						)}
-					/>
+				{/* Organizer Registration Routes - Two-part flow with theme support */}
+				<Route
+					path="/register/organizer"
+					element={getThemedComponent(
+						<OrganizerRegistrationPart1 />,
+						<OrganizerRegistrationDarkPart1 />
+					)}
+				/>
+				<Route
+					path="/register/organizer/part2"
+					element={getThemedComponent(
+						<OrganizerRegistrationPart2 />,
+						<OrganizerRegistrationDarkPart2 />
+					)}
+				/>
 
-					{/* Organizer Registration Routes - Two-part flow with theme support */}
-					<Route
-						path="/register/organizer"
-						element={getThemedComponent(
-							<OrganizerRegistrationPart1 />,
-							<OrganizerRegistrationDarkPart1 />
-						)}
-					/>
-					<Route
-						path="/register/organizer/part2"
-						element={getThemedComponent(
-							<OrganizerRegistrationPart2 />,
-							<OrganizerRegistrationDarkPart2 />
-						)}
-					/>
+				{/* Vendor Registration Routes - Two-part flow with theme support */}
+				<Route
+					path="/register/vendor"
+					element={getThemedComponent(
+						<VendorRegistrationPart1 />,
+						<VendorRegistrationDarkPart1 />
+					)}
+				/>
+				<Route
+					path="/register/vendor/part2"
+					element={getThemedComponent(
+						<VendorRegistrationPart2 />,
+						<VendorRegistrationDarkPart2 />
+					)}
+				/>
 
-					{/* Vendor Registration Routes - Two-part flow with theme support */}
-					<Route
-						path="/register/vendor"
-						element={getThemedComponent(
-							<VendorRegistrationPart1 />,
-							<VendorRegistrationDarkPart1 />
-						)}
-					/>
-					<Route
-						path="/register/vendor/part2"
-						element={getThemedComponent(
-							<VendorRegistrationPart2 />,
-							<VendorRegistrationDarkPart2 />
-						)}
-					/>
+				{/* Legacy routes for backward compatibility */}
+				<Route path="/login-dark" element={<Navigate to="/login" />} />
+				<Route path="/home-dark" element={<Navigate to="/" />} />
+				<Route
+					path="/role-selection-dark"
+					element={<Navigate to="/role-selection" />}
+				/>
+				<Route
+					path="/register/individual/dark"
+					element={<Navigate to="/register/individual" />}
+				/>
+				<Route
+					path="/register/individual/part2/dark"
+					element={<Navigate to="/register/individual/part2" />}
+				/>
+				<Route
+					path="/register/organizer/dark"
+					element={<Navigate to="/register/organizer" />}
+				/>
+				<Route
+					path="/register/organizer/part2/dark"
+					element={<Navigate to="/register/organizer/part2" />}
+				/>
+				<Route
+					path="/register/vendor/dark"
+					element={<Navigate to="/register/vendor" />}
+				/>
+				<Route
+					path="/register/vendor/part2/dark"
+					element={<Navigate to="/register/vendor/part2" />}
+				/>
 
-					{/* Legacy routes for backward compatibility */}
-					<Route path="/login-dark" element={<Navigate to="/login" />} />
-					<Route path="/home-dark" element={<Navigate to="/" />} />
-					<Route
-						path="/role-selection-dark"
-						element={<Navigate to="/role-selection" />}
-					/>
-					<Route
-						path="/register/individual/dark"
-						element={<Navigate to="/register/individual" />}
-					/>
-					<Route
-						path="/register/individual/part2/dark"
-						element={<Navigate to="/register/individual/part2" />}
-					/>
-					<Route
-						path="/register/organizer/dark"
-						element={<Navigate to="/register/organizer" />}
-					/>
-					<Route
-						path="/register/organizer/part2/dark"
-						element={<Navigate to="/register/organizer/part2" />}
-					/>
-					<Route
-						path="/register/vendor/dark"
-						element={<Navigate to="/register/vendor" />}
-					/>
-					<Route
-						path="/register/vendor/part2/dark"
-						element={<Navigate to="/register/vendor/part2" />}
-					/>
+				<Route path="/about" element={<AboutLoggedOut />} />
 
-					<Route path="/about" element={<AboutLoggedOut />} />
+				{/* Protected routes for authenticated users */}
+				<Route
+					path="/customer"
+					element={
+						isAuthenticated && userType === "individual" ? (
+							<CustomerPage logout={logout} />
+						) : (
+							<Navigate to="/" />
+						)
+					}
+				/>
+				<Route
+					path="/organizer"
+					element={
+						isAuthenticated && userType === "organizer" ? (
+							<OrganizerPage logout={logout} />
+						) : (
+							<Navigate to="/" />
+						)
+					}
+				/>
+				<Route
+					path="/vendor"
+					element={
+						isAuthenticated && userType === "vendor" ? (
+							<VendorPage logout={logout} />
+						) : (
+							<Navigate to="/" />
+						)
+					}
+				/>
+				<Route path="/organizers/:id" element={<OrganizerDetails />} />
 
-					{/* Protected routes for authenticated users */}
-					<Route
-						path="/customer"
-						element={
-							isAuthenticated && userType === "individual" ? (
-								<CustomerPage logout={logout} />
-							) : (
-								<Navigate to="/" />
-							)
-						}
-					/>
-					<Route
-						path="/organizer"
-						element={
-							isAuthenticated && userType === "organizer" ? (
-								<OrganizerPage logout={logout} />
-							) : (
-								<Navigate to="/" />
-							)
-						}
-					/>
-					<Route
-						path="/vendor"
-						element={
-							isAuthenticated && userType === "vendor" ? (
-								<VendorPage logout={logout} />
-							) : (
-								<Navigate to="/" />
-							)
-						}
-					/>
-					<Route path="/organizers/:id" element={<OrganizerDetails />} />
+				{/* CUSTOMER ROUTES */}
+				<Route path="/customer/about" element={<About_customer />} />
+				<Route path="/customer/book" element={<Book_customer />} />
+				<Route
+					path="/customer/bookings"
+					element={<Bookings_customer logout={logout} />}
+				/>
+				<Route
+					path="/customer/RSVP"
+					element={<RSVP_customer logout={logout} />}
+				/>
+				<Route
+					path="/customer/reviews"
+					element={<Reviews_customer logout={logout} />}
+				/>
+				<Route
+					path="/customer/settings"
+					element={<Settings_customer logout={logout} />}
+				/>
 
-					{/* CUSTOMER ROUTES */}
-					<Route path="/customer/about" element={<About_customer />} />
-					<Route path="/customer/book" element={<Book_customer />} />
-					<Route
-						path="/customer/bookings"
-						element={<Bookings_customer logout={logout} />}
-					/>
-					<Route
-						path="/customer/RSVP"
-						element={<RSVP_customer logout={logout} />}
-					/>
-					<Route
-						path="/customer/reviews"
-						element={<Reviews_customer logout={logout} />}
-					/>
-					<Route
-						path="/customer/settings"
-						element={<Settings_customer logout={logout} />}
-					/>
+				{/* ORGANIZER ROUTES */}
+				<Route path="/organizer/about" element={<About_organizer />} />
+				<Route path="/organizer/book" element={<Book_organizer />} />
+				<Route
+					path="/organizer/bookings"
+					element={<Bookings_organizer logout={logout} />}
+				/>
+				<Route
+					path="/organizer/dashboard"
+					element={<Dashboard_organizer logout={logout} />}
+				/>
+				<Route
+					path="/organizer/RSVP"
+					element={<RSVP_organizer logout={logout} />}
+				/>
+				<Route
+					path="/organizer/reviews"
+					element={<Reviews_organizer logout={logout} />}
+				/>
 
-					{/* ORGANIZER ROUTES */}
-					<Route path="/organizer/about" element={<About_organizer />} />
-					<Route path="/organizer/book" element={<Book_organizer />} />
-					<Route
-						path="/organizer/bookings"
-						element={<Bookings_organizer logout={logout} />}
-					/>
-					<Route
-						path="/organizer/dashboard"
-						element={<Dashboard_organizer logout={logout} />}
-					/>
-					<Route
-						path="/organizer/RSVP"
-						element={<RSVP_organizer logout={logout} />}
-					/>
-					<Route
-						path="/organizer/reviews"
-						element={<Reviews_organizer logout={logout} />}
-					/>
-
-					{/* VENDOR ROUTES */}
-					<Route path="/vendor/about" element={<About_vendor />} />
-					<Route path="/vendor/book" element={<Book_vendor />} />
-					<Route
-						path="/vendor/bookings"
-						element={<Bookings_vendor logout={logout} />}
-					/>
-					<Route
-						path="/vendor/reviews"
-						element={<Reviews_vendor logout={logout} />}
-					/>
-					<Route
-						path="/vendor/dashboard"
-						element={<Dashboard_vendor logout={logout} />}
-					/>
-					<Route
-						path="/vendor/settings"
-						element={<Settings_vendor logout={logout} />}
-					/>
-					<Route
-						path="/vendor/track"
-						element={<Track_vendor logout={logout} />}
-					/>
-					<Route
-						path="/vendor/usermanagement"
-						element={<Usermanagement_vendor logout={logout} />}
-					/>
-				</Routes>
-			</Router>
-		</ThemeProvider>
+				{/* VENDOR ROUTES */}
+				<Route path="/vendor/about" element={<About_vendor />} />
+				<Route path="/vendor/book" element={<Book_vendor />} />
+				<Route
+					path="/vendor/bookings"
+					element={<Bookings_vendor logout={logout} />}
+				/>
+				<Route
+					path="/vendor/reviews"
+					element={<Reviews_vendor logout={logout} />}
+				/>
+				<Route
+					path="/vendor/dashboard"
+					element={<Dashboard_vendor logout={logout} />}
+				/>
+				<Route
+					path="/vendor/settings"
+					element={<Settings_vendor logout={logout} />}
+				/>
+				<Route
+					path="/vendor/track"
+					element={<Track_vendor logout={logout} />}
+				/>
+				<Route
+					path="/vendor/usermanagement"
+					element={<Usermanagement_vendor logout={logout} />}
+				/>
+			</Routes>
+		</Router>
 	);
 };
 
