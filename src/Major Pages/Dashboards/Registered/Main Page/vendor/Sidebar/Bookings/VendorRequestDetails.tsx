@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import React, { FC, useState, useCallback, useMemo } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import BudgetProposal from './VendorBudgetProposal';
@@ -8,9 +8,117 @@ interface RequestDetailsProps {
   onClose: () => void;
 }
 
+// Memoized Schedule Item Component
+const ScheduleItem = React.memo(({ 
+  day, 
+  month, 
+  title, 
+  description, 
+  time 
+}: { 
+  day: number;
+  month: string;
+  title: string;
+  description: string;
+  time: string;
+}) => (
+  <div className="flex gap-4 items-start">
+    <div className="text-center">
+      <p className="text-sm">{month}</p>
+      <p className="text-2xl font-bold">{day}</p>
+    </div>
+    <div>
+      <h5 className="font-medium mb-1">{title}</h5>
+      <p className="text-sm text-gray-600">{description}</p>
+      <p className="text-sm text-gray-500">{time}</p>
+    </div>
+  </div>
+));
+
+// Memoized Budget Proposal Modal
+const BudgetProposalModal = React.memo(({ 
+  show, 
+  onClose 
+}: { 
+  show: boolean; 
+  onClose: () => void;
+}) => {
+  if (!show) return null;
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
+      <BudgetProposal onClose={onClose} />
+    </div>
+  );
+});
+
 const RequestDetails: FC<RequestDetailsProps> = ({ onClose }) => {
   const [date, setDate] = useState(new Date(2023, 2, 1));
   const [showBudgetProposal, setShowBudgetProposal] = useState(false);
+
+  const handleDateChange = useCallback((value: Value) => {
+    if (value instanceof Date && value.getTime() !== date.getTime()) {
+      setDate(value);
+    }
+  }, [date]);
+
+  const handleBudgetProposalOpen = useCallback(() => {
+    setShowBudgetProposal(true);
+  }, []);
+
+  const handleBudgetProposalClose = useCallback(() => {
+    setShowBudgetProposal(false);
+  }, []);
+
+  const getTileClassName = useCallback(({ date }: { date: Date }) => {
+    const highlightDays = [1, 2, 3]; // Days in March
+    return date.getMonth() === 2 && highlightDays.includes(date.getDate())
+      ? "bg-blue-600 text-white rounded"
+      : "";
+  }, []);
+
+  // Memoize schedule items data
+  const scheduleItems = useMemo(() => [
+    {
+      day: 1,
+      month: "MAR",
+      title: "Day 1",
+      description: "CICS Week Opening",
+      time: "9:00 AM - 5:00 PM"
+    },
+    {
+      day: 2,
+      month: "MAR",
+      title: "Day 2",
+      description: "Main Program",
+      time: "9:00 AM - 5:00 PM"
+    },
+    {
+      day: 3,
+      month: "MAR",
+      title: "Day 3",
+      description: "Closing Program",
+      time: "9:00 AM - 5:00 PM"
+    }
+  ], []);
+
+  // Memoize schedule items rendering
+  const memoizedScheduleItems = useMemo(() => 
+    scheduleItems.map((item, index) => (
+      <ScheduleItem key={index} {...item} />
+    )),
+    [scheduleItems]
+  );
+
+  // Memoize calendar component
+  const calendarComponent = useMemo(() => (
+    <Calendar
+      onChange={handleDateChange}
+      value={date}
+      defaultActiveStartDate={new Date(2023, 2, 1)}
+      className="!w-full !border-0 !rounded-lg shadow-sm"
+      tileClassName={getTileClassName}
+    />
+  ), [date, handleDateChange, getTileClassName]);
 
   return (
     <div className="bg-white p-8 rounded-lg flex gap-8">
@@ -18,11 +126,21 @@ const RequestDetails: FC<RequestDetailsProps> = ({ onClose }) => {
       <div className="flex-1">
         {/* Header Section */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-sm text-gray-500">Request Details</h2>
-            <div className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
-              Pending
+          <div className="flex items-center justify-between gap-2 mb-4">
+            <div className="flex items-center gap-2">
+              <h2 className="text-sm text-gray-500">Request Details</h2>
+              <div className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
+                Pending
+              </div>
             </div>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
           
           <h1 className="text-xl font-semibold text-blue-600 mb-2">
@@ -40,63 +158,12 @@ const RequestDetails: FC<RequestDetailsProps> = ({ onClose }) => {
           <div className="flex gap-8">
             {/* Calendar */}
             <div className="w-[350px]">
-              <Calendar
-                onChange={(value: Value) => value instanceof Date && setDate(value)}
-                value={date}
-                defaultActiveStartDate={new Date(2023, 2, 1)}
-                className="!w-full !border-0 !rounded-lg shadow-sm"
-                tileClassName={({ date }) => {
-                  const day = date.getDate();
-                  const month = date.getMonth();
-                  if (month === 2 && day >= 1 && day <= 3) {
-                    return 'bg-blue-600 text-white rounded';
-                  }
-                  return '';
-                }}
-              />
+              {calendarComponent}
             </div>
 
             {/* Schedule Details */}
             <div className="flex-1 space-y-6">
-              <div>
-                <div className="flex gap-4 items-start">
-                  <div className="text-center">
-                    <p className="text-sm">MAR</p>
-                    <p className="text-2xl font-bold">1</p>
-                  </div>
-                  <div>
-                    <h5 className="font-medium mb-1">Day 1</h5>
-                    <p className="text-sm text-gray-600">CICS Week Opening</p>
-                    <p className="text-sm text-gray-500">9:00 AM - 5:00 PM</p>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="flex gap-4 items-start">
-                  <div className="text-center">
-                    <p className="text-sm">MAR</p>
-                    <p className="text-2xl font-bold">2</p>
-                  </div>
-                  <div>
-                    <h5 className="font-medium mb-1">Day 2</h5>
-                    <p className="text-sm text-gray-600">Main Program</p>
-                    <p className="text-sm text-gray-500">9:00 AM - 5:00 PM</p>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="flex gap-4 items-start">
-                  <div className="text-center">
-                    <p className="text-sm">MAR</p>
-                    <p className="text-2xl font-bold">3</p>
-                  </div>
-                  <div>
-                    <h5 className="font-medium mb-1">Day 3</h5>
-                    <p className="text-sm text-gray-600">Closing Program</p>
-                    <p className="text-sm text-gray-500">9:00 AM - 5:00 PM</p>
-                  </div>
-                </div>
-              </div>
+              {memoizedScheduleItems}
             </div>
           </div>
         </div>
@@ -152,7 +219,7 @@ const RequestDetails: FC<RequestDetailsProps> = ({ onClose }) => {
             </div>
 
             <button 
-              onClick={() => setShowBudgetProposal(true)}
+              onClick={handleBudgetProposalOpen}
               className="w-full py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
             >
               Propose a Budget
@@ -203,13 +270,12 @@ const RequestDetails: FC<RequestDetailsProps> = ({ onClose }) => {
         </div>
       </div>
 
-      {showBudgetProposal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
-          <BudgetProposal onClose={() => setShowBudgetProposal(false)} />
-        </div>
-      )}
+      <BudgetProposalModal 
+        show={showBudgetProposal} 
+        onClose={handleBudgetProposalClose} 
+      />
     </div>
   );
 };
 
-export default RequestDetails; 
+export default React.memo(RequestDetails); 
