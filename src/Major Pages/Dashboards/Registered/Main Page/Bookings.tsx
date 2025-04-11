@@ -273,33 +273,36 @@ const Bookings: React.FC = () => {
                 {booking.startTime} – {booking.endTime}
               </p>
 
-              <div className="grid grid-cols-3 gap-4 mb-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
                 {/* Column 1, Row 1 */}
                 <div className="flex items-center">
                   <User className="text-gray-400 mr-2" size={18} />
                   <span className="text-gray-600">{booking.customer}</span>
                 </div>
+
                 {/* Column 2, Row 1 */}
                 <div className="flex items-center">
                   <MapPin className="text-gray-400 mr-2" size={18} />
                   <span className="text-gray-600">{booking.location}</span>
                 </div>
+
                 {/* Column 3, Row 1 */}
-                <div className="flex justify-center"></div>{" "}
-                {/* Empty space in Row 1 for Column 3 */}
+                <div className="flex justify-center lg:justify-end"></div>
+
                 {/* Column 1, Row 2 */}
-                <div className="flex justify-center"></div>{" "}
-                {/* Empty space in Row 1 for Column 3 */}
+                <div className="flex justify-center lg:justify-start"></div>
+
                 {/* Column 2, Row 2 */}
                 <div className="flex items-center">
                   <User className="text-gray-400 mr-2" size={18} />
                   <span className="text-gray-600">{booking.guests}</span>
                 </div>
+
                 {/* Column 3, Row 2 (Event Details Button) */}
-                <div className="flex justify-center col-start-3">
+                <div className="flex justify-center lg:justify-end col-start-1 lg:col-start-3">
                   <button
                     onClick={() => onBookingClick(booking)}
-                    className="w-80/100 bg-yellow-400 hover:bg-yellow-300 text-black text-sm font-medium px-4 py-2 rounded"
+                    className="w-full lg:w-auto bg-yellow-400 hover:bg-yellow-300 text-black text-sm font-medium px-4 py-2 rounded"
                   >
                     Event Details
                   </button>
